@@ -10,4 +10,6 @@ import com.example.demo.entity.User;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+
+
 }
