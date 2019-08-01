@@ -128,7 +128,7 @@ public class SampleTest {
     @Test
     public void fastJsonTest(){
         Buy buy = new Buy();
-        buy.setName("wang");
+        buy.setName("xxxxx");
         buy.setBuyTime(LocalDateTime.now());
         buyMapper.insert(buy);
         //JSON解析LocalDateTime成字符串和存到数据库是不带T的

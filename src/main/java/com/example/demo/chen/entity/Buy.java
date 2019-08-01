@@ -3,6 +3,7 @@ package com.example.demo.chen.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -51,7 +52,7 @@ public class Buy implements Serializable {
      * @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  格式化前台日期参数注解
      * @JSONField(pattern = "yyyy-MM-dd HH:mm:ss")  FastJson包使用注解
      */
-    @JSONField(format = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime buyTime;
 
 
