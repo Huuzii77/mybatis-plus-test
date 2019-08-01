@@ -1,17 +1,8 @@
 package com.example.demo;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.entity.User;
-import com.example.demo.mapper.UserMapper;
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 /**
  * @author chendesheng chendesheng@tuhu.cn
@@ -21,8 +12,10 @@ import java.util.List;
 @SpringBootTest
 public class SampleTest {
 
-    @Autowired
+    /*@Autowired
     private UserMapper userMapper;
+    @Autowired
+    UserInfoService userInfoService;
 
     @Test
     public void testSelect() {
@@ -60,6 +53,14 @@ public class SampleTest {
 
     @Test
     public void testWrapper(){
-
-    }
+//初始化返回类
+        Map<String,Object> result = new HashMap<>();
+        //查询年龄等于18岁的学生
+        //等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE age = 18
+        QueryWrapper<UserInfoEntity> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.lambda().eq(UserInfoEntity::getAge,18);
+        List<UserInfoEntity> userInfoEntityList1 = userInfoService.list(queryWrapper1);
+        result.put("studentAge18",userInfoEntityList1);
+        System.out.println(result);
+    }*/
 }

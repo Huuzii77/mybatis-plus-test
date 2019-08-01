@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.baomidou.mybatisplus.samples.quickstart.mapper")
-@MapperScan("com.example.demo.mapper")
+@MapperScan("com.example.demo.chen.mapper")
 public class DemoApplication {
 
     public static void main(String[] args) {
