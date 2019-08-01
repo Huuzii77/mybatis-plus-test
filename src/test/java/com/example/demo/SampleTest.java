@@ -1,8 +1,28 @@
 package com.example.demo;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.chen.entity.Buy;
+import com.example.demo.chen.entity.User;
+import com.example.demo.chen.entity.UserInfo;
+import com.example.demo.chen.mapper.BuyMapper;
+import com.example.demo.chen.mapper.UserInfoMapper;
+import com.example.demo.chen.mapper.UserMapper;
+import com.example.demo.chen.service.IUserInfoService;
+import com.example.demo.chen.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author chendesheng chendesheng@tuhu.cn
@@ -10,12 +30,19 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class SampleTest {
 
-    /*@Autowired
+    @Autowired
     private UserMapper userMapper;
     @Autowired
-    UserInfoService userInfoService;
+    IUserService userService;
+    @Autowired
+    IUserInfoService userInfoService;
+    @Autowired
+    UserInfoMapper userInfoMapper;
+    @Autowired
+    BuyMapper buyMapper;
 
     @Test
     public void testSelect() {
@@ -23,7 +50,6 @@ public class SampleTest {
         System.out.println(("----- selectAll method test1 ------"));
 
         List<User> userList = userMapper.selectList(null);
-        Assert.assertEquals(5, userList.size());
         userList.forEach(System.out::println);
     }
     @Test
@@ -53,14 +79,61 @@ public class SampleTest {
 
     @Test
     public void testWrapper(){
-//初始化返回类
+        //初始化返回类
         Map<String,Object> result = new HashMap<>();
         //查询年龄等于18岁的学生
         //等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE age = 18
-        QueryWrapper<UserInfoEntity> queryWrapper1 = new QueryWrapper<>();
-        queryWrapper1.lambda().eq(UserInfoEntity::getAge,18);
-        List<UserInfoEntity> userInfoEntityList1 = userInfoService.list(queryWrapper1);
-        result.put("studentAge18",userInfoEntityList1);
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.lambda().eq(UserInfo::getName,"小明");
+        List<UserInfo> userInfoEntityList = userInfoService.list(queryWrapper);
+        result.put("studentAge18",userInfoEntityList);
         System.out.println(result);
-    }*/
+    }
+
+    @Test
+    public void testUserInfoPage(){
+
+        IPage<UserInfo> page = new Page<>();
+        page.setCurrent(1);
+        page.setSize(5);
+
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().isNotNull(UserInfo::getEvaluate);
+
+        page = userInfoService.page(page, queryWrapper);
+        log.info("PAGE:{}",JSON.toJSONString(page));
+        System.out.println(page);
+    }
+
+    @Test
+    public void delete(){
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .isNotNull("name")
+                .ge("age",12);
+        int delete = userInfoMapper.delete(queryWrapper);
+        System.out.println(delete);
+
+    }
+
+    @Test
+    public void page(){
+        Page<UserInfo> page = new Page<>(1,2);
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        IPage<UserInfo> userInfoIPage = userInfoService.page(page,queryWrapper);
+        log.info("Page:{}",JSON.toJSONString(userInfoIPage));
+    }
+
+    @Test
+    public void fastJsonTest(){
+        Buy buy = new Buy();
+        buy.setName("wang");
+        buy.setBuyTime(LocalDateTime.now());
+        buyMapper.insert(buy);
+        //JSON解析LocalDateTime成字符串和存到数据库是不带T的
+        //Buy buy = buyMapper.selectById(6);
+        System.out.println(JSON.toJSONString(buy));
+    }
+
 }
