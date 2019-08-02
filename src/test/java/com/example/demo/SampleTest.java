@@ -44,6 +44,7 @@ public class SampleTest {
     @Autowired
     BuyMapper buyMapper;
 
+
     @Test
     public void testSelect() {
 
@@ -127,13 +128,19 @@ public class SampleTest {
 
     @Test
     public void fastJsonTest(){
-        Buy buy = new Buy();
-        buy.setName("xxxxx");
+        /*Buy buy = new Buy();
+        buy.setName("xi");
         buy.setBuyTime(LocalDateTime.now());
-        buyMapper.insert(buy);
+        buyMapper.insert(buy);*/
         //JSON解析LocalDateTime成字符串和存到数据库是不带T的
-        //Buy buy = buyMapper.selectById(6);
+        //QueryWrapper<Buy> queryWrapper = new QueryWrapper();
+        //queryWrapper.lambda().isNotNull(Buy::getName);
+        Buy buy = buyMapper.selectById(2);
         System.out.println(JSON.toJSONString(buy));
+    }
+
+    public static void main(String[] args) {
+        System.out.println(LocalDateTime.now());
     }
 
 }

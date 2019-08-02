@@ -22,7 +22,7 @@ public class DateController {
         System.out.println("date1:"+vo.getDate());
 
         DateVo vo2 = new DateVo();
-        vo2.setDate(LocalDateTime.now());
+        vo2.setDate(vo.getDate());
         return vo2;
     }
 

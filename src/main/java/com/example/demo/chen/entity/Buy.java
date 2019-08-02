@@ -1,6 +1,5 @@
 package com.example.demo.chen.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author chendesheng
- * @since 2019-08-01
+ * @since 2019-08-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,22 +36,20 @@ public class Buy implements Serializable {
      * NONE: 该类型为未设置主键类型
      */
     @TableId(type = IdType.AUTO)
-    @JSONField(serialize = false)
-    private Integer id;
+    private Long id;
 
     /**
      * 姓名
      */
-    @JSONField(name = "firstName")
     private String name;
 
     /**
      * 购买日期
-     * @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8") Jackson包使用注解
-     * @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  格式化前台日期参数注解
-     * @JSONField(pattern = "yyyy-MM-dd HH:mm:ss")  FastJson包使用注解
+     * @DateTimeFormat 前台传到后台
+     * @JsonField   FastJson解析数据从数据库到前台
+     * @JsonFormat  Jackson解析数据从数据库到前台
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime buyTime;
 
 

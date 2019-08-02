@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author chendesheng
- * @since 2019-08-01
+ * @since 2019-08-02
  */
 @Service
 public class BuyServiceImpl extends ServiceImpl<BuyMapper, Buy> implements IBuyService {
