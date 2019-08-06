@@ -1,15 +1,12 @@
 package com.example.demo.chen.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -17,15 +14,14 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author chendesheng
- * @since 2019-08-02
+ * @since 2019-08-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class Buy implements Serializable {
+public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     /**
      * 主键
      * @TableId中可以决定主键的类型,不写会采取默认值,默认值可以在yml中配置
@@ -39,20 +35,10 @@ public class Buy implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 姓名
-     */
-    private String name;
 
-    /**
-     * 购买日期
-     * @DateTimeFormat 前台传到后台
-     * @JsonField   FastJson解析数据从数据库到前台
-     * @JsonFormat  Jackson解析数据从数据库到前台
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime buyTime;
+    private String teacherName;
+
+    private String teacherPwd;
 
 
 }

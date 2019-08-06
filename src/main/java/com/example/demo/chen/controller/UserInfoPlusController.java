@@ -29,7 +29,7 @@ public class UserInfoPlusController {
     public Map<String,Object> getInfoListPage() {
 
         //初始化返回类
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>(10);
         //查询年龄等于18岁的学生
         //等价SQL: SELECT id,name,age,skill,evaluate,fraction FROM user_info WHERE age = 18
         QueryWrapper<UserInfo> queryWrapper1 = new QueryWrapper<>();

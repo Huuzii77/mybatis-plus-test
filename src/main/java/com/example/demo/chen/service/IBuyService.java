@@ -12,5 +12,19 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-08-02
  */
 public interface IBuyService extends IService<Buy> {
+    /**
+     * 测试事务
+     * @param buy
+     */
+    void testTransaction(Buy buy);
 
+    /**
+     * 测试事务手动回滚
+     */
+    void testTransaction2();
+
+    /**
+     * 调用子方法回滚
+     */
+    void testTransaction3();
 }
