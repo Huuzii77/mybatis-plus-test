@@ -1,12 +1,12 @@
 package com.example.demo.chen.annotation;
 
-/**
- * @authir chendesheng
- * @create 2019/8/14 15:36
- */
-
 import java.lang.annotation.*;
 
+/**
+ * 本地锁注解
+ * @author chendesheng
+ * @create 2019/8/14 15:36
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
