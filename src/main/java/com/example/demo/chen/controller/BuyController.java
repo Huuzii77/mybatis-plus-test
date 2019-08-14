@@ -44,4 +44,10 @@ public class BuyController {
         buyService.testTransaction3();
         return true;
     }
+
+    @GetMapping("/test4")
+    public boolean test4() {
+        buyService.testTransaction4();
+        return true;
+    }
 }

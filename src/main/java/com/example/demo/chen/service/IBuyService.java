@@ -27,4 +27,9 @@ public interface IBuyService extends IService<Buy> {
      * 调用子方法回滚
      */
     void testTransaction3();
+
+    /**
+     * 手动控制事务
+     */
+    void testTransaction4();
 }
