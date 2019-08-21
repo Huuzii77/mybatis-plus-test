@@ -4,7 +4,9 @@ package com.example.demo.chen.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.chen.entity.UserInfo;
+import com.example.demo.chen.lock.annotation.RedisLock;
 import com.example.demo.chen.service.IUserInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/chen/user-info")
+@Slf4j
 public class UserInfoController{
     @Autowired
     private IUserInfoService userInfoService;
@@ -44,9 +47,11 @@ public class UserInfoController{
      * @Param  userId  用户ID
      * @Return List<UserInfo> 用户实体集合
      */
+    @RedisLock(prefix = "mybatis.plus.test",expire =3000)
     @RequestMapping("/getList")
     public List<UserInfo> getList(){
         List<UserInfo> UserInfoList = userInfoService.list();
+        log.info("search all userInfo result:{}",UserInfoList);
         return UserInfoList;
     }
     /**

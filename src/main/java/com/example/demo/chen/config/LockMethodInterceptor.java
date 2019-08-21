@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * google guava实现
  * 缓存本地锁实践-5秒内不可重复提交
  * @authir chendesheng
  * @create 2019/8/14 15:38

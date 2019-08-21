@@ -14,17 +14,16 @@ import com.example.demo.chen.mapper.UserMapper;
 import com.example.demo.chen.service.IEmployeeService;
 import com.example.demo.chen.service.IUserInfoService;
 import com.example.demo.chen.service.IUserService;
+import com.example.demo.chen.utils.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author chendesheng chendesheng@tuhu.cn
@@ -183,14 +182,20 @@ public class SampleTest {
 
     @Test
     public void test(){
-        int threadCount = 100;
-        while (threadCount-- > 0) {
-            new Thread(() -> employeeService.increaseMoneyWithOptimisticLock(1)).start();
+        Jedis jedis =null;
+        try {
+          jedis = JedisUtil.getJedis();
+            jedis.set("chen","23","NX","PX",1000*6);
+            System.out.println(jedis.get("chen"));
+            Set<String> keys = jedis.keys("*");
+            System.out.println(keys);
+        }catch (Exception ex){
+
+        }finally {
+            if (jedis!=null){
+                JedisUtil.close(jedis);
+            }
         }
-        /*int threadCount = 100;
-        while (threadCount-- > 0) {
-            new Thread(() -> employeeService.increaseMoneyWithPessimisticLock(1)).start();
-        }*/
     }
 
 

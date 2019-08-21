@@ -2,8 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.chen.mapper.EmployeeMapper">
 
+    <resultMap id="BaseResultMap" type="com.example.demo.chen.entity.Employee">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="money" jdbcType="INTEGER" property="money" />
+        <result column="version" jdbcType="INTEGER" property="version" />
+    </resultMap>
 
-    <select id="findByIdWithPessimisticLock" parameterType="java.lang.Integer" resultType="com.example.demo.chen.entity.Employee">
-        SELECT * FROM employee WHERE id = #{id} FOR UPDATE
+    <select id="findByIdWithPessimisticLock" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM employee WHERE id = #{id}
     </select>
 </mapper>

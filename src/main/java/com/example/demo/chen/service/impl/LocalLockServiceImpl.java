@@ -22,6 +22,7 @@ public class LocalLockServiceImpl implements LocalLockService {
             if (null==jedis){
                 return false;
             }
+            //jedis.set(key,val,"NX","PX",1000*6);
             return jedis.set(key,val,"NX","PX",1000*6).equalsIgnoreCase("ok");
 
         } catch (Exception e) {
