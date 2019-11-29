@@ -23,9 +23,9 @@ public class MybatisPlusConfig {
      */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
-
-        //paginationInterceptor.setLimit(你的最大单页限制数量，默认 500 条，小于 0 如 -1 不受限制);
-        return new PaginationInterceptor();
+        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+        paginationInterceptor.setLimit(100000);
+        return paginationInterceptor;
     }
     /**
      * mybatis-plus SQL执行效率插件【生产环境可以关闭】

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.chen.entity.UserInfo;
 import com.example.demo.chen.service.IUserInfoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +22,14 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/userInfoPlus")
+@Api(value = "userInfo",tags = "大用户管理")
 public class UserInfoPlusController {
     @Autowired
     private IUserInfoService userInfoService;
 
 
     @RequestMapping("/getInfoListPlus")
+    @ApiOperation(value = "分页获取用户信息",notes = "mybatisPlus")
     public Map<String,Object> getInfoListPage() {
 
         //初始化返回类

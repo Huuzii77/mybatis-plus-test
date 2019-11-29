@@ -32,6 +32,7 @@ import java.util.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
+
 public class SampleTest {
 
     @Autowired
@@ -48,6 +49,7 @@ public class SampleTest {
     IEmployeeService employeeService;
     @Autowired
     EmployeeMapper employeeMapper;
+
 
 
     @Test
@@ -156,7 +158,6 @@ public class SampleTest {
             array[0] = random.nextInt(10);
             int b=0;
             while (flag) {
-
                 int a=0;
                 b = random.nextInt(10);
                 for (int j = 0; j < i; j++) {
@@ -167,16 +168,12 @@ public class SampleTest {
                 if (a==i){
                     flag=true;
                 }
-
             }
             array[i]=b;
-
         }
         for (int z=0;z<array.length;z++){
             System.out.println(z);
         }
-
-
 
     }
 
@@ -196,6 +193,14 @@ public class SampleTest {
                 JedisUtil.close(jedis);
             }
         }
+    }
+
+    @Test
+    public void testSetAddAll(){
+        Set<String> stringSet = new HashSet<>();
+        stringSet.add("chen");
+
+
     }
 
 

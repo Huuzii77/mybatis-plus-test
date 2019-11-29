@@ -7,6 +7,8 @@ package com.example.demo.chen.design.template;
  */
 public abstract  class HouseTemplate {
 
+
+
     // template method, final so subclasses can't override
     public final void buildHouse() {
         buildFoundation();
@@ -29,4 +31,6 @@ public abstract  class HouseTemplate {
     private void buildFoundation() {
         System.out.println("Building foundation with cement,iron rods and sand");
     }
+
+
 }

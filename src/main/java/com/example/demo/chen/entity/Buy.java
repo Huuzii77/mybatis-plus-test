@@ -3,6 +3,7 @@ package com.example.demo.chen.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.example.demo.chen.annotation.Check;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -42,6 +43,7 @@ public class Buy implements Serializable {
     /**
      * 姓名
      */
+    @Check(paramValues = {"chen","yu"})
     private String name;
 
     /**

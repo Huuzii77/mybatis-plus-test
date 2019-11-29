@@ -6,9 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.chen.entity.UserInfo;
 import com.example.demo.chen.lock.annotation.RedisLock;
 import com.example.demo.chen.service.IUserInfoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -24,6 +28,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/chen/user-info")
 @Slf4j
+@Api(value = "userInfo",tags = "用户管理")
 public class UserInfoController{
     @Autowired
     private IUserInfoService userInfoService;
@@ -35,7 +40,9 @@ public class UserInfoController{
      * @Param  userId  用户ID
      * @Return UserInfo 用户实体
      */
+
     @RequestMapping("/getInfo")
+    @ApiOperation(value = "获取用户信息",notes = "参数为userId")
     public UserInfo getInfo(String userId){
         UserInfo UserInfo = userInfoService.getById(userId);
         return UserInfo;
@@ -47,8 +54,10 @@ public class UserInfoController{
      * @Param  userId  用户ID
      * @Return List<UserInfo> 用户实体集合
      */
+
     @RedisLock(prefix = "mybatis.plus.test",expire =3000)
     @RequestMapping("/getList")
+    @ApiOperation(value = "获取所有用户信息")
     public List<UserInfo> getList(){
         List<UserInfo> UserInfoList = userInfoService.list();
         log.info("search all userInfo result:{}",UserInfoList);
@@ -60,12 +69,14 @@ public class UserInfoController{
      * @CreateTime 2019/6/8 16:37
      * @Return IPage<UserInfo> 分页数据
      */
-    @RequestMapping("/getInfoListPage")
-    public IPage<UserInfo> getInfoListPage(){
+
+    @PostMapping("/getInfoListPage")
+    @ApiOperation(value = "分页获取用户信息",notes = "需要在Config配置类中配置分页插件")
+    public IPage<UserInfo> getInfoListPage(@RequestParam("current") Integer current,@RequestParam("size") Integer size){
         //需要在Config配置类中配置分页插件
         IPage<UserInfo> page = new Page<>();
-        page.setCurrent(5);
-        page.setSize(1);
+        page.setCurrent(current);
+        page.setSize(size);
         page = userInfoService.page(page);
         return page;
     }

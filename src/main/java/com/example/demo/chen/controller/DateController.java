@@ -1,6 +1,7 @@
 package com.example.demo.chen.controller;
 
 import com.example.demo.chen.entity.DateVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
  */
 @RestController
 @RequestMapping("/date/")
+@Slf4j
 public class DateController {
 
     @RequestMapping("getDate")
@@ -31,6 +33,7 @@ public class DateController {
     public DateVo query() {
         DateVo order = new DateVo();
         order.setDate(LocalDateTime.now());
+        log.info("now time is:{}",order);
         return order;
     }
 }

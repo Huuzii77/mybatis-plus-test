@@ -11,6 +11,19 @@ import static java.lang.System.out;
  */
 public class Main {
 
+    class Hello{
+        private String name;
+        public String sayHello(String name){
+            return "hello"+name;
+        }
+    }
+    class what extends Hello{
+
+    }
+
+
+
+
     public static void main(String[] args) {
 
         /**
